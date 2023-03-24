@@ -2,7 +2,7 @@ import random, time
 import pickle, os, os.path
 variables = {
     # metals
-    "bronze": 0,
+    "bronze": 100000,
     "iron": 0,
     "copper": 0,
     "steel": 0,
@@ -18,6 +18,10 @@ variables = {
     "bismuth": 0, #mined
     "wood": 0, #forage
     "stone": 0, #mined
+
+    #machines
+    "bronze_drill":0,
+    "copper_drill":0,
     
     #mine
     "mine": "quarry",
@@ -52,12 +56,52 @@ while playbefore.lower() == "first":
                 print("Different Resources: \"r\"")
             elif user == "mine":
                 temp_bronze, temp_copper = variables["bronze"], variables["copper"]
-                variables["bronze"] = variables.get("bronze", 0) + random.randint(1, 10)
-                variables["copper"] = variables.get("copper", 0) + random.randint(1, 10)
+                variables["bronze"] += random.randint(1, 10)
+                variables["copper"] += random.randint(1, 10)
                 print("Mining...\n")
-                time.sleep(3)
+                if variables["bronze_drill"] == 0 and variables["copper_drill"]:
+                    time.sleep(3)
+                elif variables["bronze_drill"] >= 1 and variables["copper_drill"] == 0:
+                    timesleep = (1.5 - (variables["bronze_drill"] * 0.01)) + 1.5
+                    time.sleep(timesleep)
+                elif variables["bronze_drill"] == 0 and variables["copper_drill"] >= 1:
+                    timesleep = (1.5 - (variables["copper_drill"] * 0.01)) + 1.5
+                    time.sleep(timesleep)
+                else:
+                    timesleep = (1.5 - (variables["bronze_drill"] * 0.01)) + (1.5 - (variables["bronze_drill"] * 0.01))
+                    time.sleep(timesleep)
+               
                 print("Finished mining. You mined", variables["bronze"] - temp_bronze, "bronze and", variables["copper"] - temp_copper,"copper.\n")
                 print("You now have", variables["bronze"], "bronze and", variables["copper"],"copper now.")
+            elif user == "shop":
+                print("category?")
+                print("machines: improves the efficiency of mining")
+                usershopchoice = ""
+                while usershopchoice.lower() != "back":
+                    usershopchoice = input("Choice:")
+                    if usershopchoice == "back":
+                        break
+                    elif usershopchoice == "machine":
+                        print("Options:")
+                        bronzedrillprice = 8+((variables["bronze_drill"]+1)*2)
+                        print("Bronze Drill: Reduce the amount of time to mine\nPrice:", bronzedrillprice)
+                        userbuymachine = ""
+                        while userbuymachine.lower() != "back" or userbuymachine != "no":
+                            userbuymachine = input("Buy anything?")
+                            if userbuymachine == "bronze drill":
+                                howmany = int(input("How many?"))
+                                price = 0
+                                for i in range(howmany):
+                                    price += bronzedrillprice
+                                    variables["bronze_drill"] += 1
+                                    print(variables["bronze_drill"])
+                                variables["bronze_drill"] = 0
+                                if variables["bronze"] >= price:
+                                    variables["bronze_drill"] += howmany
+                                    variables["bronze"] -= bronzedrillprice
+                                else:
+                                    print("You don't have enough! You need", bronzedrillprice - variables["bronze"], "more bronze!")
+
             elif user == "q":
                 print("Bye")
                 break
