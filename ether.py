@@ -51,12 +51,13 @@ while playbefore.lower() == "first":
                 print("Current Mine: \"cmine\"")
                 print("Different Resources: \"r\"")
             elif user == "mine":
+                temp_bronze, temp_copper = variables["bronze"], variables["copper"]
                 variables["bronze"] = variables.get("bronze", 0) + random.randint(1, 10)
                 variables["copper"] = variables.get("copper", 0) + random.randint(1, 10)
-                print("Mining...")
+                print("Mining...\n")
                 time.sleep(3)
-                print("Finished mining. You have", variables["bronze"], "bronze and", variables["copper"],"copper now.")
-                print(variables["bronze"])
+                print("Finished mining. You mined", variables["bronze"] - temp_bronze, "bronze and", variables["copper"] - temp_copper,"copper.\n")
+                print("You now have", variables["bronze"], "bronze and", variables["copper"],"copper now.")
             elif user == "q":
                 print("Bye")
                 break
@@ -235,6 +236,9 @@ while playbefore.lower() == "first":
     break
 with open('data.pkl', 'rb') as fp:
     variables = pickle.load(fp)
+
+#if played before
+
 while playbefore.lower() == "second":
     while user.lower() != "q":
         while variables["mine"].lower() == "quarry":
@@ -247,9 +251,9 @@ while playbefore.lower() == "second":
                 temp_bronze, temp_copper = variables["bronze"], variables["copper"]
                 variables["bronze"] = variables.get("bronze", 0) + random.randint(1, 10)
                 variables["copper"] = variables.get("copper", 0) + random.randint(1, 10)
-                print("Mining...")
+                print("Mining...\n")
                 time.sleep(3)
-                print("Finished mining. You mined", variables["bronze"] - temp_bronze, "bronze and", variables["copper"] - temp_copper,"copper.")
+                print("Finished mining. You mined", variables["bronze"] - temp_bronze, "bronze and", variables["copper"] - temp_copper,"copper.\n")
                 print("You now have", variables["bronze"], "bronze and", variables["copper"],"copper now.")
             elif user == "q":
                 print("Bye")
@@ -336,7 +340,6 @@ while playbefore.lower() == "second":
                 print("Error! Not a command! type \"h\" for help!")
 
 #caverns
-
         while variables["mine"].lower() == "caverns":
             user = input("What do you want to do next?(h for help, q to quit):")
             if user == "h":
