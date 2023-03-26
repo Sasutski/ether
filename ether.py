@@ -98,16 +98,23 @@ while playbefore.lower() == "first":
                                     price += bronzedrillprice
                                     variables["bronze_drill"] += 1
                                 variables["bronze_drill"] = 0
-                                if variables["bronze"] >= price:
-                                    variables["bronze_drill"] += howmany
-                                    variables["bronze"] -= bronzedrillprice
-                                    price = 0
-                                    print("you have bought", howmany, "bronze drills!")
-                                    howmany = 0
-                                else:
-                                    print("You don't have enough! You need", bronzedrillprice - variables["bronze"], "more bronze!")
-                                    price = 0
-                                    howmany = 0
+                                print("Price:", price, "bronze")
+                                choice = ""
+                                while choice.lower() != "n":
+                                    choice = input("Are you sure you want to buy this? (y/n)")
+                                    if choice == "y":
+                                        if variables["bronze"] >= price:
+                                            variables["bronze_drill"] += howmany
+                                            variables["bronze"] -= bronzedrillprice
+                                            price = 0
+                                            print("you have bought", howmany, "bronze drills!")
+                                            howmany = 0
+                                        else:
+                                            print("You don't have enough! You need", bronzedrillprice - variables["bronze"], "more bronze!")
+                                            price = 0
+                                            howmany = 0
+                                    elif choice == "y":
+                                        break
                             elif userbuymachine == "2":
                                 howmany = int(input("How many?"))
                                 price = 0
@@ -115,20 +122,49 @@ while playbefore.lower() == "first":
                                     price += copperdrillprice
                                     variables["copper_drill"] += 1
                                 variables["copper_drill"] = 0
-                                if variables["copper"] >= price:
-                                    variables["copper_drill"] += howmany
-                                    variables["copper"] -= copperdrillprice
-                                    price = 0
-                                    print("you have bought", howmany, "copper drills!")
-                                    howmany = 0    
-                                else:
-                                    print("You don't have enough! You need", copperdrillprice - variables["copper"], "more bronze!")
-                                    price = 0
-                                    howmany = 0
+                                print("Price:", price, "copper")
+                                choice = ""
+                                while choice.lower() != "n":
+                                    choice = input("Are you sure you want to buy this? (y/n)")
+                                    if choice == "y":
+                                        if variables["copper"] >= price:
+                                            variables["copper_drill"] += howmany
+                                            variables["copper"] -= copperdrillprice
+                                            price = 0
+                                            print("you have bought", howmany, "copper drills!")
+                                            howmany = 0    
+                                        else:
+                                            print("You don't have enough! You need", copperdrillprice - variables["copper"], "more bronze!")
+                                            price = 0
+                                            howmany = 0
+                                    elif choice == "n":
+                                        break
                             elif userbuymachine == "back":
                                 break
                             else:
                                 print("Input the number corresponding to the item! eg. 1 = bronze drill because 1)Bronze Drill")
+                    elif usershopchoice == "scrolls":
+                        print("options")
+                        print("1)Scroll to the caverns")
+                        print("Would you like to buy this? (y/n) price: 1000 bronze and 1000 copper")
+                        userbuyscroll = ""
+                        while userbuyscroll.lower() != "n":
+                            if userbuyscroll == "y":
+                                if variables["bronze"] >= 1000 and variables["copper"] >= 1000 and variables["scroll_caverns"] != 1:
+                                    print("Successfully bought!")
+                                    variables["scroll_caverns"] = 1
+                                    variables["bronze"] - 1000
+                                    variables["copper"] - 1000
+                                elif variables["scroll_caverns"] == 1:
+                                    print("You already have bought the max amount (1) of this!")
+                                elif variables["bronze"] < 1000 and variables["copper"] >= 1000:
+                                    print("Not enought bronze! You need", 1000 - variables["bronze"], "more bronze!")
+                                elif variables["bronze"] >= 1000 and variables["copper"] < 1000:
+                                    print("Not enough copper! You need", 1000 - variables["copper"], "more copper!")
+                                else:
+                                    print("Not enough bronze and copper! You need", 1000 - variables["bronze"], "more bronze and", 1000 - variables["copper"], "more copper!")
+                            elif userbuyscroll.lower() != "n":
+                                break
             elif user == "q":
                 print("Bye")
                 break
@@ -359,16 +395,23 @@ while playbefore.lower() == "second":
                                     price += bronzedrillprice
                                     variables["bronze_drill"] += 1
                                 variables["bronze_drill"] = 0
-                                if variables["bronze"] >= price:
-                                    variables["bronze_drill"] += howmany
-                                    variables["bronze"] -= bronzedrillprice
-                                    price = 0
-                                    print("you have bought", howmany, "bronze drills!")
-                                    howmany = 0
-                                else:
-                                    print("You don't have enough! You need", bronzedrillprice - variables["bronze"], "more bronze!")
-                                    price = 0
-                                    howmany = 0
+                                print("Price:", price, "bronze")
+                                choice = ""
+                                while choice.lower() != "n":
+                                    choice = input("Are you sure you want to buy this? (y/n)")
+                                    if choice == "y":
+                                        if variables["bronze"] >= price:
+                                            variables["bronze_drill"] += howmany
+                                            variables["bronze"] -= bronzedrillprice
+                                            price = 0
+                                            print("you have bought", howmany, "bronze drills!")
+                                            howmany = 0
+                                        else:
+                                            print("You don't have enough! You need", bronzedrillprice - variables["bronze"], "more bronze!")
+                                            price = 0
+                                            howmany = 0
+                                    elif choice == "n":
+                                        break
                             elif userbuymachine == "2":
                                 howmany = int(input("How many?"))
                                 price = 0
@@ -376,21 +419,49 @@ while playbefore.lower() == "second":
                                     price += copperdrillprice
                                     variables["copper_drill"] += 1
                                 variables["copper_drill"] = 0
-                                if variables["copper"] >= price:
-                                    variables["bronze_drill"] += howmany
-                                    variables["bronze"] -= bronzedrillprice
-                                    price = 0
-                                    print("you have bought", howmany, "copper drills!")
-                                    howmany = 0
-                                else:
-                                    print("You don't have enough! You need", copperdrillprice - variables["bronze"], "more bronze!")
-                                    price = 0
-                                    howmany = 0
+                                print("Price:", price, "copper")
+                                choice = ""
+                                while choice.lower() != "n":
+                                    choice = input("Are you sure you want to buy this? (y/n)")
+                                    if choice == "y":
+                                        if variables["copper"] >= price:
+                                            variables["copper_drill"] += howmany
+                                            variables["copper"] -= copperdrillprice
+                                            price = 0
+                                            print("you have bought", howmany, "copper drills!")
+                                            howmany = 0    
+                                        else:
+                                            print("You don't have enough! You need", copperdrillprice - variables["copper"], "more bronze!")
+                                            price = 0
+                                            howmany = 0
+                                    elif choice == "n":
+                                        break
                             elif userbuymachine == "back":
                                 break
                             else:
                                 print("Input the number corresponding to the item! eg. 1 = bronze drill because 1)Bronze Drill")
-
+                    elif usershopchoice == "scrolls":
+                        print("options")
+                        print("1)Scroll to the caverns")
+                        print("Would you like to buy this? (y/n) price: 1000 bronze and 1000 copper")
+                        userbuyscroll = ""
+                        while userbuyscroll.lower() != "n":
+                            if userbuyscroll == "y":
+                                if variables["bronze"] >= 1000 and variables["copper"] >= 1000 and variables["scroll_caverns"] != 1:
+                                    print("Successfully bought!")
+                                    variables["scroll_caverns"] = 1
+                                    variables["bronze"] - 1000
+                                    variables["copper"] - 1000
+                                elif variables["scroll_caverns"] == 1:
+                                    print("You already have bought the max amount (1) of this!")
+                                elif variables["bronze"] < 1000 and variables["copper"] >= 1000:
+                                    print("Not enought bronze! You need", 1000 - variables["bronze"], "more bronze!")
+                                elif variables["bronze"] >= 1000 and variables["copper"] < 1000:
+                                    print("Not enough copper! You need", 1000 - variables["copper"], "more copper!")
+                                else:
+                                    print("Not enough bronze and copper! You need", 1000 - variables["bronze"], "more bronze and", 1000 - variables["copper"], "more copper!")
+                            elif userbuyscroll == "n":
+                                break
             elif user == "cmine":
                 print("The Quarry")
             elif user == "r":
