@@ -84,11 +84,14 @@ while playbefore.lower() == "first":
                     elif usershopchoice == "machine":
                         print("Options:")
                         bronzedrillprice = 8+((variables["bronze_drill"]+1)*2)
-                        print("Bronze Drill: Reduce the amount of time to mine\nPrice:", bronzedrillprice)
+                        copperdrillprice = 10+((variables["copper_drill"]+1)*2)
+                        print("1)Bronze Drill: Reduce the amount of time to mine in the quarry\nPrice:", bronzedrillprice)
+                        print("2)Copper Drill: Reduce the amount of time to mine in the quarry\nPrice:", copperdrillprice)
                         userbuymachine = ""
+                        time.sleep(1)
                         while userbuymachine.lower() != "back" or userbuymachine != "no":
                             userbuymachine = input("Buy anything?")
-                            if userbuymachine == "bronze drill":
+                            if userbuymachine == "1":
                                 howmany = int(input("How many?"))
                                 price = 0
                                 for i in range(howmany):
@@ -98,11 +101,34 @@ while playbefore.lower() == "first":
                                 if variables["bronze"] >= price:
                                     variables["bronze_drill"] += howmany
                                     variables["bronze"] -= bronzedrillprice
+                                    price = 0
+                                    print("you have bought", howmany, "bronze drills!")
+                                    howmany = 0
                                 else:
                                     print("You don't have enough! You need", bronzedrillprice - variables["bronze"], "more bronze!")
+                                    price = 0
+                                    howmany = 0
+                            elif userbuymachine == "2":
+                                howmany = int(input("How many?"))
+                                price = 0
+                                for i in range(howmany):
+                                    price += copperdrillprice
+                                    variables["copper_drill"] += 1
+                                variables["copper_drill"] = 0
+                                if variables["copper"] >= price:
+                                    variables["copper_drill"] += howmany
+                                    variables["copper"] -= copperdrillprice
+                                    price = 0
+                                    print("you have bought", howmany, "copper drills!")
+                                    howmany = 0    
+                                else:
+                                    print("You don't have enough! You need", copperdrillprice - variables["copper"], "more bronze!")
+                                    price = 0
+                                    howmany = 0
                             elif userbuymachine == "back":
                                 break
-
+                            else:
+                                print("Input the number corresponding to the item! eg. 1 = bronze drill because 1)Bronze Drill")
             elif user == "q":
                 print("Bye")
                 break
@@ -186,7 +212,10 @@ while playbefore.lower() == "first":
                         break
             else:
                 print("Error! Not a command! type \"h\" for help!")
-            
+            with open('data.pkl', 'wb') as fp:
+                pickle.dump(variables, fp)
+
+
             #caverns
         while variables["mine"].lower() == "caverns":
             user = input("What do you want to do next?(h for help, q to quit):")
@@ -275,10 +304,12 @@ while playbefore.lower() == "first":
                         break
                     break
                 break
-            break
-    with open('data.pkl', 'wb') as fp:
-        pickle.dump(variables, fp)
-    break
+            with open('data.pkl', 'wb') as fp:
+                pickle.dump(variables, fp)
+        
+        
+        break
+
 with open('data.pkl', 'rb') as fp:
     variables = pickle.load(fp)
 
@@ -314,26 +345,52 @@ while playbefore.lower() == "second":
                     elif usershopchoice == "machine":
                         print("Options:")
                         bronzedrillprice = 8+((variables["bronze_drill"]+1)*2)
-                        print("Bronze Drill: Reduce the amount of time to mine\nPrice:", bronzedrillprice)
+                        copperdrillprice = 10+((variables["copper_drill"]+1)*2)
+                        print("1)Bronze Drill: Reduce the amount of time to mine in the quarry\nPrice:", bronzedrillprice)
+                        print("2)Copper Drill: Reduce the amount of time to mine in the quarry\nPrice:", copperdrillprice)
                         userbuymachine = ""
+                        time.sleep(1)
                         while userbuymachine.lower() != "back" or userbuymachine != "no":
                             userbuymachine = input("Buy anything?")
-                            if userbuymachine == "bronze drill":
+                            if userbuymachine == "1":
                                 howmany = int(input("How many?"))
                                 price = 0
                                 for i in range(howmany):
                                     price += bronzedrillprice
                                     variables["bronze_drill"] += 1
                                 variables["bronze_drill"] = 0
-                                print(variables["bronze_drill"])
                                 if variables["bronze"] >= price:
                                     variables["bronze_drill"] += howmany
                                     variables["bronze"] -= bronzedrillprice
-                                    print(variables["bronze_drill"])
+                                    price = 0
+                                    print("you have bought", howmany, "bronze drills!")
+                                    howmany = 0
                                 else:
                                     print("You don't have enough! You need", bronzedrillprice - variables["bronze"], "more bronze!")
+                                    price = 0
+                                    howmany = 0
+                            elif userbuymachine == "2":
+                                howmany = int(input("How many?"))
+                                price = 0
+                                for i in range(howmany):
+                                    price += copperdrillprice
+                                    variables["copper_drill"] += 1
+                                variables["copper_drill"] = 0
+                                if variables["copper"] >= price:
+                                    variables["bronze_drill"] += howmany
+                                    variables["bronze"] -= bronzedrillprice
+                                    price = 0
+                                    print("you have bought", howmany, "copper drills!")
+                                    howmany = 0
+                                else:
+                                    print("You don't have enough! You need", copperdrillprice - variables["bronze"], "more bronze!")
+                                    price = 0
+                                    howmany = 0
                             elif userbuymachine == "back":
                                 break
+                            else:
+                                print("Input the number corresponding to the item! eg. 1 = bronze drill because 1)Bronze Drill")
+
             elif user == "cmine":
                 print("The Quarry")
             elif user == "r":
