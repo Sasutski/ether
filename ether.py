@@ -40,6 +40,7 @@ if playbefore.lower() == "y":
 elif playbefore.lower() == "n":
     time.sleep(1)
     print("Welcome to the ether.")
+    print("Version 1.1")
     time.sleep(1)
     print("The story:")
     time.sleep(1)
@@ -52,8 +53,11 @@ while playbefore.lower() == "first":
             time.sleep(0.25)
             user = input("What do you want to do next?(h for help, q to quit):")
             if user == "h":
+                print("Mine Materials: \"mine\"")
+                print("Shop: \"shop\"")
                 print("Current Mine: \"cmine\"")
                 print("Different Resources: \"r\"")
+                
             elif user == "mine":
                 temp_bronze, temp_copper = variables["bronze"], variables["copper"]
                 variables["bronze"] += random.randint(1, 10)
@@ -75,7 +79,7 @@ while playbefore.lower() == "first":
                 print("You now have", variables["bronze"], "bronze and", variables["copper"],"copper now.")
             elif user == "shop":
                 print("category?")
-                print("machines: improves the efficiency of mining")
+                print("machine: improves the efficiency of mining")
                 usershopchoice = ""
                 while usershopchoice.lower() != "back":
                     usershopchoice = input("Choice:")
@@ -94,10 +98,11 @@ while playbefore.lower() == "first":
                             if userbuymachine == "1":
                                 howmany = int(input("How many?"))
                                 price = 0
+                                temp_bronzedrill = variables["bronze_drill"]
                                 for i in range(howmany):
                                     price += bronzedrillprice
                                     variables["bronze_drill"] += 1
-                                variables["bronze_drill"] = 0
+                                variables["bronze_drill"] = temp_bronzedrill
                                 print("Price:", price, "bronze")
                                 choice = ""
                                 while choice.lower() != "n":
@@ -118,10 +123,11 @@ while playbefore.lower() == "first":
                             elif userbuymachine == "2":
                                 howmany = int(input("How many?"))
                                 price = 0
+                                temp_copperdrill = variables["copper_drill"]
                                 for i in range(howmany):
                                     price += copperdrillprice
                                     variables["copper_drill"] += 1
-                                variables["copper_drill"] = 0
+                                variables["copper_drill"] = temp_copperdrill
                                 print("Price:", price, "copper")
                                 choice = ""
                                 while choice.lower() != "n":
@@ -341,10 +347,8 @@ while playbefore.lower() == "first":
                     break
                 break
             with open('data.pkl', 'wb') as fp:
-                pickle.dump(variables, fp)
-        
-        
-        break
+                pickle.dump(variables, fp)      
+    break
 
 with open('data.pkl', 'rb') as fp:
     variables = pickle.load(fp)
@@ -352,11 +356,15 @@ with open('data.pkl', 'rb') as fp:
 #if played before
 
 while playbefore.lower() == "second":
+    print("Welcome Back!")
+    print("Version 1.1")
     while user.lower() != "q":
         while variables["mine"].lower() == "quarry":
             time.sleep(0.25)
             user = input("What do you want to do next?(h for help, q to quit):")
             if user == "h":
+                print("Mine Materials: \"mine\"")
+                print("Shop: \"shop\"")
                 print("Current Mine: \"cmine\"")
                 print("Different Resources: \"r\"")
             elif user == "mine":
@@ -372,7 +380,7 @@ while playbefore.lower() == "second":
                 break
             elif user == "shop":
                 print("category?")
-                print("machines: improves the efficiency of mining")
+                print("machine: improves the efficiency of mining")
                 usershopchoice = ""
                 while usershopchoice.lower() != "back":
                     usershopchoice = input("Choice:")
@@ -391,10 +399,11 @@ while playbefore.lower() == "second":
                             if userbuymachine == "1":
                                 howmany = int(input("How many?"))
                                 price = 0
+                                temp_bronzedrill = variables["bronze_drill"]
                                 for i in range(howmany):
                                     price += bronzedrillprice
                                     variables["bronze_drill"] += 1
-                                variables["bronze_drill"] = 0
+                                variables["bronze_drill"] = temp_bronzedrill
                                 print("Price:", price, "bronze")
                                 choice = ""
                                 while choice.lower() != "n":
@@ -415,10 +424,11 @@ while playbefore.lower() == "second":
                             elif userbuymachine == "2":
                                 howmany = int(input("How many?"))
                                 price = 0
+                                temp_copperdrill = variables["copper_drill"]
                                 for i in range(howmany):
                                     price += copperdrillprice
                                     variables["copper_drill"] += 1
-                                variables["copper_drill"] = 0
+                                variables["copper_drill"] = temp_copperdrill
                                 print("Price:", price, "copper")
                                 choice = ""
                                 while choice.lower() != "n":
@@ -629,7 +639,6 @@ while playbefore.lower() == "second":
                         variables["mine"] = "quarry"
                         print("You have warped to the caverns")
                         break
-        with open('data.pkl', 'wb') as fp:
-            pickle.dump(variables, fp)
-            break
+            with open('data.pkl', 'wb') as fp:
+                pickle.dump(variables, fp)
     break
