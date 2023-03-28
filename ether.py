@@ -20,8 +20,12 @@ variables = {
     "stone": 0, #mined
 
     #machines
+        #Drills: makes mining easier
     "bronze_drill":0,
     "copper_drill":0,
+        #magic circle: multiplies the resource
+    "bronze_magic_circle":0,
+    "copper_magic_circle":0,
     
     #mine
     "mine": "quarry",
@@ -32,7 +36,6 @@ variables = {
 }
 
 #if no play game
-
 user = ""
 playbefore = input("have you played before? y/n \n")
 if playbefore.lower() == "y":
@@ -60,8 +63,12 @@ while playbefore.lower() == "first":
                 
             elif user == "mine":
                 temp_bronze, temp_copper = variables["bronze"], variables["copper"]
-                variables["bronze"] += random.randint(1, 10)
-                variables["copper"] += random.randint(1, 10)
+                lowestbronze = 5 + variables["bronze_magic_circle"] * 2
+                highestbronze = 8 + variables["bronze_magic_circle"] * 2
+                lowestcopper = 5 + variables["copper_magic_circle"] * 2
+                highestcopper = 8 + variables["copper_magic_circle"] * 2
+                variables["bronze"] += random.randint(lowestbronze, highestbronze)
+                variables["copper"] += random.randint(lowestcopper, highestcopper)
                 print("Mining...\n")
                 if variables["bronze_drill"] == 0 and variables["copper_drill"]:
                     time.sleep(3)
@@ -114,11 +121,13 @@ while playbefore.lower() == "first":
                                             price = 0
                                             print("you have bought", howmany, "bronze drills!")
                                             howmany = 0
+                                            break
                                         else:
                                             print("You don't have enough! You need", bronzedrillprice - variables["bronze"], "more bronze!")
                                             price = 0
                                             howmany = 0
-                                    elif choice == "y":
+                                            break
+                                    elif choice == "n":
                                         break
                             elif userbuymachine == "2":
                                 howmany = int(input("How many?"))
@@ -138,13 +147,17 @@ while playbefore.lower() == "first":
                                             variables["copper"] -= copperdrillprice
                                             price = 0
                                             print("you have bought", howmany, "copper drills!")
-                                            howmany = 0    
+                                            howmany = 0
+                                            break    
                                         else:
                                             print("You don't have enough! You need", copperdrillprice - variables["copper"], "more bronze!")
                                             price = 0
                                             howmany = 0
+                                            break
                                     elif choice == "n":
                                         break
+                            elif userbuymachine == "3":
+                                print("Sure")
                             elif userbuymachine == "back":
                                 break
                             else:
@@ -369,8 +382,12 @@ while playbefore.lower() == "second":
                 print("Different Resources: \"r\"")
             elif user == "mine":
                 temp_bronze, temp_copper = variables["bronze"], variables["copper"]
-                variables["bronze"] = variables.get("bronze", 0) + random.randint(1, 10)
-                variables["copper"] = variables.get("copper", 0) + random.randint(1, 10)
+                lowestbronze = 5 + variables["bronze_magic_circle"] * 2
+                highestbronze = 8 + variables["bronze_magic_circle"] * 2
+                lowestcopper = 5 + variables["copper_magic_circle"] * 2
+                highestcopper = 8 + variables["copper_magic_circle"] * 2
+                variables["bronze"] += random.randint(lowestbronze, highestbronze)
+                variables["copper"] += random.randint(lowestcopper, highestcopper)
                 print("Mining...\n")
                 time.sleep(3)
                 print("Finished mining. You mined", variables["bronze"] - temp_bronze, "bronze and", variables["copper"] - temp_copper,"copper.\n")
@@ -415,10 +432,12 @@ while playbefore.lower() == "second":
                                             price = 0
                                             print("you have bought", howmany, "bronze drills!")
                                             howmany = 0
+                                            break
                                         else:
                                             print("You don't have enough! You need", bronzedrillprice - variables["bronze"], "more bronze!")
                                             price = 0
                                             howmany = 0
+                                            break
                                     elif choice == "n":
                                         break
                             elif userbuymachine == "2":
@@ -440,10 +459,12 @@ while playbefore.lower() == "second":
                                             price = 0
                                             print("you have bought", howmany, "copper drills!")
                                             howmany = 0    
+                                            break
                                         else:
                                             print("You don't have enough! You need", copperdrillprice - variables["copper"], "more bronze!")
                                             price = 0
                                             howmany = 0
+                                            break
                                     elif choice == "n":
                                         break
                             elif userbuymachine == "back":
