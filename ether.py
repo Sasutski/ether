@@ -89,8 +89,8 @@ while playbefore.lower() == "first":
                 print("category?")
                 print("1) machine: improves the efficiency of mining")
                 usershopchoice = ""
-                while usershopchoice.lower() != "back":
-                    usershopchoice = int(input("Choice:"))
+                while usershopchoice != "back":
+                    usershopchoice = input("Choice:")
                     print("Use the numbers! Back to exit")
                     if usershopchoice == "back":
                         break
@@ -242,6 +242,8 @@ while playbefore.lower() == "first":
                                     print("Not enough bronze and copper! You need", 1000 - variables["bronze"], "more bronze and", 1000 - variables["copper"], "more copper!")
                             elif userbuyscroll.lower() != "n":
                                 break
+                    else:
+                        print("Not a command! Please try again!")
             elif user == "q":
                 print("Bye")
                 break
@@ -465,8 +467,8 @@ while playbefore.lower() == "second":
                 print("category?")
                 print("1) machine: improves the efficiency of mining")
                 usershopchoice = ""
-                while usershopchoice.lower() != "back":
-                    usershopchoice = int(input("Choice:"))
+                while usershopchoice != "back":
+                    usershopchoice = input("Choice:")
                     print("Use the numbers! Back to exit")
                     if usershopchoice == "back":
                         break
@@ -482,7 +484,7 @@ while playbefore.lower() == "second":
                         print("4)Copper Magic Circle: Increases the amount of copper mined per mining session. Price:", coppermagicprice)
                         userbuymachine = ""
                         time.sleep(1)
-                        while userbuymachine.lower() != "back" or userbuymachine != "no":
+                        while userbuymachine != "back" or userbuymachine != "no":
                             userbuymachine = input("Buy anything? Back to exit")
                             if userbuymachine == "1":
                                 howmany = int(input("How many?"))
