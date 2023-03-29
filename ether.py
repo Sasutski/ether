@@ -100,10 +100,10 @@ while playbefore.lower() == "first":
                         copperdrillprice = 10+((variables["copper_drill"]+1)*2)
                         bronzemagicprice = 15+((variables["bronze_magic_circle"]+1)*2)
                         coppermagicprice = 18+((variables["copper_magic_circle"]+1)*2)
-                        print("1)Bronze Drill: Reduce the amount of time to mine in the quarry\nPrice:", bronzedrillprice)
-                        print("2)Copper Drill: Reduce the amount of time to mine in the quarry\nPrice:", copperdrillprice)
-                        print("3)Bronze Magic Circle: increase the amount of bronze mined per mining session. Price:", bronzemagicprice)
-                        print("4)Copper Magic Circle: Increases the amount of copper mined per mining session. Price:", coppermagicprice)
+                        print("1)Bronze Drill: Reduce the amount of time to mine in the quarry\nPrice:", bronzedrillprice,"\n")
+                        print("2)Copper Drill: Reduce the amount of time to mine in the quarry\nPrice:", copperdrillprice,"\n")
+                        print("3)Bronze Magic Circle: increase the amount of bronze mined per mining session.\nPrice:", bronzemagicprice,"\n")
+                        print("4)Copper Magic Circle: Increases the amount of copper mined per mining session.\nPrice:", coppermagicprice)
                         userbuymachine = ""
                         time.sleep(1)
                         while userbuymachine.lower() != "back" or userbuymachine != "no":
@@ -156,7 +156,7 @@ while playbefore.lower() == "first":
                                             howmany = 0
                                             break    
                                         else:
-                                            print("You don't have enough! You need", copperdrillprice - variables["copper"], "more bronze!")
+                                            print("You don't have enough! You need", copperdrillprice - variables["copper"], "more copper!")
                                             price = 0
                                             howmany = 0
                                             break
@@ -448,6 +448,7 @@ while playbefore.lower() == "second":
                 print("Current Mine: \"cmine\"")
                 print("Check Resources: \"cr\"")
                 print("Different Resources: \"r\"")
+                
             elif user == "mine":
                 temp_bronze, temp_copper = variables["bronze"], variables["copper"]
                 lowestbronze = 5 + variables["bronze_magic_circle"] * 2
@@ -457,12 +458,20 @@ while playbefore.lower() == "second":
                 variables["bronze"] += random.randint(lowestbronze, highestbronze)
                 variables["copper"] += random.randint(lowestcopper, highestcopper)
                 print("Mining...\n")
-                time.sleep(3)
+                if variables["bronze_drill"] == 0 and variables["copper_drill"]:
+                    time.sleep(3)
+                elif variables["bronze_drill"] >= 1 and variables["copper_drill"] == 0:
+                    timesleep = (1.5 - (variables["bronze_drill"] * 0.01)) + 1.5
+                    time.sleep(timesleep)
+                elif variables["bronze_drill"] == 0 and variables["copper_drill"] >= 1:
+                    timesleep = (1.5 - (variables["copper_drill"] * 0.01)) + 1.5
+                    time.sleep(timesleep)
+                else:
+                    timesleep = (1.5 - (variables["bronze_drill"] * 0.01)) + (1.5 - (variables["bronze_drill"] * 0.01))
+                    time.sleep(timesleep)
+               
                 print("Finished mining. You mined", variables["bronze"] - temp_bronze, "bronze and", variables["copper"] - temp_copper,"copper.\n")
                 print("You now have", variables["bronze"], "bronze and", variables["copper"],"copper now.")
-            elif user == "q":
-                print("Bye")
-                break
             elif user == "shop":
                 print("category?")
                 print("1) machine: improves the efficiency of mining")
@@ -478,13 +487,13 @@ while playbefore.lower() == "second":
                         copperdrillprice = 10+((variables["copper_drill"]+1)*2)
                         bronzemagicprice = 15+((variables["bronze_magic_circle"]+1)*2)
                         coppermagicprice = 18+((variables["copper_magic_circle"]+1)*2)
-                        print("1)Bronze Drill: Reduce the amount of time to mine in the quarry\nPrice:", bronzedrillprice)
-                        print("2)Copper Drill: Reduce the amount of time to mine in the quarry\nPrice:", copperdrillprice)
-                        print("3)Bronze Magic Circle: increase the amount of bronze mined per mining session. Price:", bronzemagicprice)
-                        print("4)Copper Magic Circle: Increases the amount of copper mined per mining session. Price:", coppermagicprice)
+                        print("1)Bronze Drill: Reduce the amount of time to mine in the quarry\nPrice:", bronzedrillprice,"\n")
+                        print("2)Copper Drill: Reduce the amount of time to mine in the quarry\nPrice:", copperdrillprice,"\n")
+                        print("3)Bronze Magic Circle: increase the amount of bronze mined per mining session.\nPrice:", bronzemagicprice,"\n")
+                        print("4)Copper Magic Circle: Increases the amount of copper mined per mining session.\nPrice:", coppermagicprice)
                         userbuymachine = ""
                         time.sleep(1)
-                        while userbuymachine != "back" or userbuymachine != "no":
+                        while userbuymachine.lower() != "back" or userbuymachine != "no":
                             userbuymachine = input("Buy anything? Back to exit")
                             if userbuymachine == "1":
                                 howmany = int(input("How many?"))
@@ -534,7 +543,7 @@ while playbefore.lower() == "second":
                                             howmany = 0
                                             break    
                                         else:
-                                            print("You don't have enough! You need", copperdrillprice - variables["copper"], "more bronze!")
+                                            print("You don't have enough! You need", copperdrillprice - variables["copper"], "more copper!")
                                             price = 0
                                             howmany = 0
                                             break
@@ -620,6 +629,11 @@ while playbefore.lower() == "second":
                                     print("Not enough bronze and copper! You need", 1000 - variables["bronze"], "more bronze and", 1000 - variables["copper"], "more copper!")
                             elif userbuyscroll.lower() != "n":
                                 break
+                    else:
+                        print("Not a command! Please try again!")
+            elif user == "q":
+                print("Bye")
+                break
             elif user == "cmine":
                 print("The Quarry")
             elif user == "cr":
@@ -707,8 +721,11 @@ while playbefore.lower() == "second":
                         break
             else:
                 print("Error! Not a command! type \"h\" for help!")
+            with open('data.pkl', 'wb') as fp:
+                pickle.dump(variables, fp)
 
-#caverns
+
+            #caverns
         while variables["mine"].lower() == "caverns":
             user = input("What do you want to do next?(h for help, q to quit):")
             if user == "h":
@@ -794,6 +811,8 @@ while playbefore.lower() == "second":
                         variables["mine"] = "quarry"
                         print("You have warped to the caverns")
                         break
+                    break
+                break
             with open('data.pkl', 'wb') as fp:
                 pickle.dump(variables, fp)
     break
