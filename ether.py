@@ -88,10 +88,10 @@ while playbefore.lower() == "first":
             elif user == "shop":
                 print("category?")
                 print("1) machine: improves the efficiency of mining")
+                print("2) scrolls: to different places we go!")
                 usershopchoice = ""
                 while usershopchoice != "back":
                     usershopchoice = input("Choice:")
-                    print("Use the numbers! Back to exit")
                     if usershopchoice == "back":
                         break
                     elif usershopchoice == "1":
@@ -136,7 +136,7 @@ while playbefore.lower() == "first":
                                     elif choice == "n":
                                         break
                             elif userbuymachine == "2":
-                                howmany = int(input("How many?"))
+                                howmany = int(input("How many? Please put in an integer!"))
                                 price = 0
                                 temp_copperdrill = variables["copper_drill"]
                                 for i in range(howmany):
@@ -220,7 +220,7 @@ while playbefore.lower() == "first":
                                 break
                             else:
                                 print("Input the number corresponding to the item! eg. 1 = bronze drill because 1)Bronze Drill")
-                    elif usershopchoice == "scrolls":
+                    elif usershopchoice == "2":
                         print("options")
                         print("1)Scroll to the caverns")
                         print("Would you like to buy this? (y/n) price: 1000 bronze and 1000 copper")
@@ -475,10 +475,10 @@ while playbefore.lower() == "second":
             elif user == "shop":
                 print("category?")
                 print("1) machine: improves the efficiency of mining")
+                print("2) scrolls: to different places we go!")
                 usershopchoice = ""
                 while usershopchoice != "back":
                     usershopchoice = input("Choice:")
-                    print("Use the numbers! Back to exit")
                     if usershopchoice == "back":
                         break
                     elif usershopchoice == "1":
@@ -523,7 +523,7 @@ while playbefore.lower() == "second":
                                     elif choice == "n":
                                         break
                             elif userbuymachine == "2":
-                                howmany = int(input("How many?"))
+                                howmany = int(input("How many? Please put in an integer!"))
                                 price = 0
                                 temp_copperdrill = variables["copper_drill"]
                                 for i in range(howmany):
@@ -607,7 +607,7 @@ while playbefore.lower() == "second":
                                 break
                             else:
                                 print("Input the number corresponding to the item! eg. 1 = bronze drill because 1)Bronze Drill")
-                    elif usershopchoice == "scrolls":
+                    elif usershopchoice == "2":
                         print("options")
                         print("1)Scroll to the caverns")
                         print("Would you like to buy this? (y/n) price: 1000 bronze and 1000 copper")
@@ -814,5 +814,5 @@ while playbefore.lower() == "second":
                     break
                 break
             with open('data.pkl', 'wb') as fp:
-                pickle.dump(variables, fp)
+                pickle.dump(variables, fp)      
     break
