@@ -29,6 +29,7 @@ variables = {
     
     #mine
     "mine": "quarry",
+    "mine": "ether",
 
     #scrolls
     "scroll_caverns":0,
