@@ -62,7 +62,7 @@ while playbefore.lower() == "first":
                 print("Current Mine: \"cmine\"")
                 print("Check Resources: \"cr\"")
                 print("Different Resources: \"r\"")
-                
+                print("The bazaar: \"bz\"")
             elif user == "mine":
                 temp_bronze, temp_copper = variables["bronze"], variables["copper"]
                 lowestbronze = 5 + variables["bronze_magic_circle"] * 2
@@ -449,7 +449,7 @@ while playbefore.lower() == "second":
                 print("Current Mine: \"cmine\"")
                 print("Check Resources: \"cr\"")
                 print("Different Resources: \"r\"")
-                
+                print("The bazaar: \"bz\"")
             elif user == "mine":
                 temp_bronze, temp_copper = variables["bronze"], variables["copper"]
                 lowestbronze = 5 + variables["bronze_magic_circle"] * 2
